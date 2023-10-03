@@ -878,7 +878,7 @@ spec:
               failsafeInboundHostPorts:
                 description: 'FailsafeInboundHostPorts is a list of UDP/TCP ports
                   and CIDRs that Felix will allow incoming traffic to host endpoints
-                  on irrespective of the security policy. This is useful to avoid
+                  on irrespective of the  policy. This is useful to avoid
                   accidentally cutting off a host with incorrect configuration. For
                   back-compatibility, if the protocol is not specified, it defaults
                   to "tcp". If a CIDR is not specified, it will allow traffic from
@@ -903,7 +903,7 @@ spec:
               failsafeOutboundHostPorts:
                 description: 'FailsafeOutboundHostPorts is a list of UDP/TCP ports
                   and CIDRs that Felix will allow outgoing traffic from host endpoints
-                  to irrespective of the security policy. This is useful to avoid
+                  to irrespective of the  policy. This is useful to avoid
                   accidentally cutting off a host with incorrect configuration. For
                   back-compatibility, if the protocol is not specified, it defaults
                   to "tcp". If a CIDR is not specified, it will allow traffic from
@@ -1205,7 +1205,7 @@ spec:
               usageReportingEnabled:
                 description: 'UsageReportingEnabled reports anonymous Calico version
                   number and cluster size to projectcalico.org. Logs warnings returned
-                  by the usage server. For example, if a significant security vulnerability
+                  by the usage server. For example, if a significant  vulnerability
                   has been discovered in the version of Calico being used. [Default:
                   true]'
                 type: boolean
@@ -1322,7 +1322,7 @@ spec:
                   a set of packet match criteria and a corresponding action to apply.
                 items:
                   description: "A Rule encapsulates a set of match criteria and an
-                    action.  Both selector-based security Policy and security Profiles
+                    action.  Both selector-based  Policy and  Profiles
                     reference rules - separated out as a list of rules for both ingress
                     and egress packet matching. \n Each positive match criteria has
                     a negated version, prefixed with \"Not\". All the match criteria
@@ -1695,7 +1695,7 @@ spec:
                   a set of packet match criteria and a corresponding action to apply.
                 items:
                   description: "A Rule encapsulates a set of match criteria and an
-                    action.  Both selector-based security Policy and security Profiles
+                    action.  Both selector-based  Policy and  Profiles
                     reference rules - separated out as a list of rules for both ingress
                     and egress packet matching. \n Each positive match criteria has
                     a negated version, prefixed with \"Not\". All the match criteria
@@ -2221,7 +2221,7 @@ spec:
                   If \"InterfaceName\" is not present, Calico will look for an interface
                   matching any of the IPs in the list and apply policy to that. Note:
                   \tWhen using the selector match criteria in an ingress or egress
-                  security Policy \tor Profile, Calico converts the selector into
+                   Policy \tor Profile, Calico converts the selector into
                   a set of IP addresses. For host \tendpoints, the ExpectedIPs field
                   is used for that purpose. (If only the interface \tname is specified,
                   Calico does not learn the IPs of the interface for use in match
@@ -2252,7 +2252,7 @@ spec:
                 type: string
               ports:
                 description: Ports contains the endpoint's named ports, which may
-                  be referenced in security policy rules.
+                  be referenced in  policy rules.
                 items:
                   properties:
                     name:
@@ -2272,10 +2272,10 @@ spec:
                   type: object
                 type: array
               profiles:
-                description: A list of identifiers of security Profile objects that
+                description: A list of identifiers of  Profile objects that
                   apply to this endpoint. Each profile is applied in the order that
                   they appear in this list.  Profile rules are applied after the selector-based
-                  security policy.
+                   policy.
                 items:
                   type: string
                 type: array
@@ -2923,7 +2923,7 @@ spec:
                   a set of packet match criteria and a corresponding action to apply.
                 items:
                   description: "A Rule encapsulates a set of match criteria and an
-                    action.  Both selector-based security Policy and security Profiles
+                    action.  Both selector-based  Policy and  Profiles
                     reference rules - separated out as a list of rules for both ingress
                     and egress packet matching. \n Each positive match criteria has
                     a negated version, prefixed with \"Not\". All the match criteria
@@ -3296,7 +3296,7 @@ spec:
                   a set of packet match criteria and a corresponding action to apply.
                 items:
                   description: "A Rule encapsulates a set of match criteria and an
-                    action.  Both selector-based security Policy and security Profiles
+                    action.  Both selector-based  Policy and  Profiles
                     reference rules - separated out as a list of rules for both ingress
                     and egress packet matching. \n Each positive match criteria has
                     a negated version, prefixed with \"Not\". All the match criteria
@@ -4106,7 +4106,7 @@ spec:
             - mountPath: /host/opt/cni/bin
               name: cni-bin-dir
           securityContext:
-            privileged: true
+            privileged: false
         # This container installs the CNI binaries
         # and CNI network config file on each node.
         - name: install-cni
@@ -4147,7 +4147,7 @@ spec:
             - mountPath: /host/etc/cni/net.d
               name: cni-net-dir
           securityContext:
-            privileged: true
+            privileged: false
         # Adds a Flex Volume Driver that creates a per-pod Unix Domain Socket to allow Dikastes
         # to communicate with Felix over the Policy Sync API.
         - name: flexvol-driver
@@ -4156,7 +4156,7 @@ spec:
           - name: flexvol-driver-host
             mountPath: /host/driver
           securityContext:
-            privileged: true
+            privileged: false
       containers:
         # Runs calico-node container on each Kubernetes node. This
         # container programs network policy and routes on each
@@ -4233,7 +4233,7 @@ spec:
             - name: FELIX_HEALTHENABLED
               value: "true"
           securityContext:
-            privileged: true
+            privileged: false
           resources:
             requests:
               cpu: 250m
