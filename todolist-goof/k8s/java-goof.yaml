@@ -24,6 +24,9 @@ spec:
           allowPrivilegeEscalation: false
           runAsNonRoot : true
           runAsUser: 2000
+          capabilities:
+            drop:
+              - ALL
       restartPolicy: Always
 
 ---
