@@ -21,6 +21,8 @@ spec:
         imagePullPolicy: Always
         name: java-goof
       restartPolicy: Always
+      securityContext:
+        allowPrivilegeEscalation: false
 ---
 apiVersion: v1
 kind: Service
